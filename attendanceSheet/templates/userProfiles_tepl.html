@@ -1,0 +1,43 @@
+{% extends 'baseLayout.html' %}
+
+{% block someFcn %}
+    <h1>userProfiles</h1>
+    <table style="margin-bottom: 50px;" align="center">
+        <tr>
+            <th>username</th>
+            <th>intern</th>
+            <th>junior</th>
+            <th>senior</th>
+            <th>family</th>
+        </tr>
+    {% for profile in finalPresent %}
+        <tr>
+            <td>{{profile.user}}</td>
+            {% if profile.isIntern %}
+            <td> O </td>
+            {% else %}
+            <td> X </td>
+            {% endif %}
+
+            {% if profile.isJunior %}
+            <td> O </td>
+            {% else %}
+            <td> X </td>
+            {% endif %}
+
+            {% if profile.isSenior %}
+            <td> O </td>
+            {% else %}
+            <td> X </td>
+            {% endif %}
+
+            {% if profile.isFamily %}
+            <td> O </td>
+            {% else %}
+            <td> X </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+    <button class="btn" onclick="location.href = '/accounts/logout'">logout</button>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'baseLayout.html' %}
+
+{% block someFcn %}
+    <h1>Login</h1>
+    <form style="margin-bottom: 10px" action='/accounts/login/' method='post'>
+        {% csrf_token %}
+        {{form}}
+        <br>
+        <input class="btn" type="submit" value='Login'>
+    </form>
+
+    <button class = 'btn' onclick="location.href = '/collaAdmin/userProfile'">test login student</button>
+    <button class = 'btn' onclick="location.href = '/collaAdmin/teacherpage'">test login teacher</button>
+{% endblock %}

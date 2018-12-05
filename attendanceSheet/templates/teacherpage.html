@@ -1,0 +1,8 @@
+{% extends 'baseLayout.html' %}
+
+{% block someFcn %}
+    <h1>teacher page</h1>
+    <button class = 'btn btn-xl' onclick="location.href = '/collaAdmin/userAttendance'">attendence</button>
+    <button class="btn btn-xl" onclick="location.href = '/rollcall'">點名</button>
+    <button class = 'btn btn-xl' onclick="location.href = '/accounts/logout'">logout</button>
+{% endblock %}

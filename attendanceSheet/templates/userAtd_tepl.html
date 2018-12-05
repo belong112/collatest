@@ -1,0 +1,30 @@
+{% extends 'baseLayout.html' %}
+
+{% block someFcn %}
+    <h1>attendanceSheet</h1>
+
+    <form id='search-by-user' action='' method='post'>
+        {% csrf_token %}
+        <label for='targetUser'> look for particular user </label>
+        <input type=text name='targetUser' id='targetUser'>
+        <input type=hidden name='searchUser' value='whatever'>
+    </form>
+
+    <table align = "center">
+        <tr>
+            <th>user</th>
+            {% for course in courseLst %}
+            <th>{{course.course_name}}</th>
+            {% endfor %}
+        </tr>
+        {% for key,value in atdDict.items %}
+        <tr>
+            <th>{{key}}</th>
+            {% for status in value%}
+            <th>{{status}}</th>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

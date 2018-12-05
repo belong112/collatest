@@ -1,0 +1,20 @@
+{% extends 'baseLayout.html' %}
+
+{% block someFcn %}
+
+    <!-- <p><a class="btn" href="/accounts/signup"> signup </a></p>
+    <p><a class="btn" href="/accounts/login"> login </a></p>
+    <p><a class="btn" href="/accounts/logout">logout</a></p>
+    <p><a class="btn" href="/collaAdmin/userAttendance"> attendance Sheet </a></p>
+    <p><a class="btn" href="/rollcall">點名點名</a></p> -->
+    <header><H1>WELCOME</H1></header>
+    <button class="btn btn-xl col-lg-4" onclick="location.href = '/accounts/login' ">I'm a student.</button>
+    <button class="btn btn-xl col-lg-4" onclick="location.href = '/accounts/login' ">I'm a teacher.</button>
+
+    <!-- <p><a href="/accounts/signup"> signup </a></p>
+    <p><a href="/accounts/login"> login </a></p>
+    <p><a href="/accounts/logout">logout</a></p>
+    <p><a href="/collaAdmin/userAttendance"> attendance Sheet </a></p>
+    <p><a href="/collaAdmin/sign">sign</a></p>
+ -->
+{% endblock %}

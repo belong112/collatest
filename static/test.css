@@ -1,0 +1,43 @@
+body{
+	background-color: azure;
+	color: #777;
+	width: 100% !important;
+	height: 100% !important;
+	text-align: center;
+	font-family: Helvetica Neue,Noto Sans TC;
+}
+
+header{
+	color: #6c6c6c;
+	margin-top: 50px;
+	margin-bottom:150px;
+}
+.header h1{
+	font-size: 70px;
+}
+
+.formstyle{
+	margin-bottom: 1px;
+}
+button{
+	font-family: Noto Sans TC;
+}
+button:hover{
+	color: #FFF;
+	background-color: #BEBEBE;
+} 
+
+.btn-xl{
+	font-size: 60px;
+	border-radius: 10px;
+	width:50%;
+	margin-right: 10px;
+}
+/*.btn{
+	color: #777;
+	background-color: white;
+	border-radius: 0px;
+	border-color: #777;
+	padding: 1px 6px;
+	margin-bottom: 4px;
+}*/
