@@ -49,3 +49,22 @@ def sign(request):
 
 def teacherpage(request):
     return render(request,'teacherpage.html')
+
+def addCourse(request):
+    if request.method=="POST":
+        courseDate=request.POST['course_date']
+        courseName=request.POST['course_name']
+        courseDescription=request.POST['course_description']
+        date_course.objects.create(date=courseDate,course_name=courseName,memo=courseDescription)
+
+        #幫固有的使用者創建新課堂的出席紀錄
+        userLst=User.objects.all()
+        newCourse=date_course.objects.get(course_name=courseName)
+        for user in userLst:
+            attendanceSheet.objects.create(user=user,course=newCourse)
+        return redirect('/collaAdmin/userAttendance')
+    else:
+       return render(request,'addCourse.html',locals())
+
+def manageCourse(request):
+    return HttpResponse('manageCourse')

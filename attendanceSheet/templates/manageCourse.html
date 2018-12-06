@@ -1,0 +1,21 @@
+{% extends 'baseLayout.html' %}
+
+{% block someFcn %}
+    <h1>新增課程</h1>
+    <form id='add-course' action='' method='post'>
+        {% csrf_token %}
+        <label for='course_name'>課堂名稱</label>
+        <input type=text name='course_name' id='course_nane'>
+        <br>
+        <label for='course_date'>課堂日期(yyyy/mm/dd)</label>
+        <input type=text name='course_date' id='course_date'>
+        <br>
+        <label for='course_description'>課堂描述</label>
+        <br>
+        <textarea name='course_description' style="width:400px;height:150px"></textarea>
+        <br>
+        
+        <input type=hidden name='newCourse' value='whatever'>
+        <input type=submit value='新增課程'>
+    </form>
+{% endblock %}
