@@ -1,1 +1,1 @@
-web: gunicorn collaAttendance.wsgi --log-file -
+web: gunicorn collaAttendance.wsgi

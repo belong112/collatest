@@ -1,10 +1,11 @@
+{% load staticfiles %}
 <!doctype html>
 <html>
     <head>
         <title>Collaborator</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel='stylesheet' href='./mainpage.css'> 
+        <link rel='stylesheet' href="{% static 'mainpage.css' %}""> 
     </head>
 
     <body>
@@ -18,7 +19,7 @@
                 <p class='passage' style='font-variant-caps: all-small-caps; font-weight: bold; font-size: 180%;'>
                     Student
                 </p>
-                <img src='./logo.jpg'></img>
+                <img src="{% static 'logo.jpg' %}"></img>
             </div>
             <div id='teacher'>
                 <p class='passage' style='font-variant-caps: all-small-caps; font-weight: bold; font-size: 180%; margin-bottom: 30px;'>Teacher</p>

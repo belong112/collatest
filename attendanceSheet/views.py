@@ -55,7 +55,7 @@ def sign(request,time):
             attendanceSheet.objects.filter(user=currentUser,course=currenCourse).update(presence=True,absence=False)
             return HttpResponse('succesfully signUp')
             
-        return redirect('/accounts/login',t = time)
+        return redirect('/accounts/login/'+str(time))
     
 
 def teacherpage(request):
