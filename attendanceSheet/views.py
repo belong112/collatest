@@ -49,3 +49,14 @@ def sign(request):
 
 def teacherpage(request):
     return render(request,'teacherpage.html')
+
+def addCourse(request):
+    if request.method=="POST":
+        courseDate=request.POST['course_date']
+        courseName=request.POST['course_name']
+        courseDescription=request.POST['course_description']
+        testStr=courseDate+courseName+courseDescription
+        return HttpResponse(testStr)
+
+
+    return render(request,'addCourse.html',locals())
