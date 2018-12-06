@@ -81,15 +81,13 @@ def manageCourse(request):
     courseLst=date_course.objects.all()
     courseInfoLst=[]
     courseNameLst=[]
-    courseDateLst=[]
-    courseMemoLst=[]
     courseMtrx=[]
+    courseDict=dict()
     for course in courseLst:
         courseInfoLst.append(course.course_name)
         courseInfoLst.append(course.date)
         courseInfoLst.append(course.memo)
         courseMtrx.append(courseInfoLst)
+        courseInfoLst=[]
         courseNameLst.append(course.course_name)
-        courseDateLst.append(course.date)
-        courseMemoLst.append(course.memo)
     return render(request,'manageCourse.html',locals())

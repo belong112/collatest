@@ -9,11 +9,11 @@
                 <th>課堂日期</th>
                 <th>課堂描述</th>
            </tr>
-           {% for name,date,memo in courseMtrx.items %}
+           {% for course in courseMtrx %}
            <tr>
-               <th>{{name}}</th>
-               <th>{{date}}</th>
-               <th>{{memo}}</th>
+                {% for info in course %}
+                <th> {{info}} </th>
+                {% endfor %}
            </tr>
            {% endfor %}
         </table>
