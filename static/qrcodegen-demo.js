@@ -43,8 +43,18 @@ var app = new function() {
 		var date = new Date();
 		var hour = date.getHours();
 		var minute = date.getMinutes();
-		var text = document.getElementById("text-input").innerHTML;
-		var segs = qrcodegen.QrSegment.makeSegments('https://rollcalltest.herokuapp.com/login/'+100*hour+minute);
+		var second = date.getSeconds();
+		var timer = 30;
+		var tt = setInterval(function () {
+        if (--timer % 10 == 0) {
+        	var segs = qrcodegen.QrSegment.makeSegments('https://colla-atd.herokuapp.com/collaAdmin/sign'+minute*10+second);
+        	initialize();
+    			clearInterval(tt);
+        }
+    }, 1000);
+
+	 	var text = document.getElementById("text-input").innerHTML;
+		var segs = qrcodegen.QrSegment.makeSegments('https://rollcalltest.herokuapp.com/login/'+hour+minute+second);
 		var minVer = parseInt(document.getElementById("version-min-input").value, 10);
 		var maxVer = parseInt(document.getElementById("version-max-input").value, 10);
 		var mask = parseInt(document.getElementById("mask-input").value, 10);
