@@ -11,7 +11,7 @@
 			<div id="TEXTINPUT">
 				<div><textarea hidden="true" placeholder="plz enter the date ex.1125" id="text-input" style="width:30%; max-width:30em; height:3em; font-family:inherit"></textarea></div>
 			</div>
-			<button class="btn" id='start' onclick="hi(10); gettime();">開始點名</button> <!-- 時間 -->
+			<button class="btn" id='start' onclick="hi(30);">開始點名</button> <!-- 時間 -->
 			<div>
 				<!-- <p><strong>QR Code:</strong></p> -->
 				<div id="QRCODE" style="display: none;">
@@ -39,20 +39,10 @@
 		</form>
 	</div>
 	<div>
-		<button class="btn" onclick="location.href = '/homepage'">back</button>
+		<button class="btn" onclick="location.href = '/collaAdmin/teacherpage'">back</button>
 	</div>
 
 <script type="text/javascript">
-	function gettime(){
-		var date = new Date();
-		// var y = date.getFullYear();
-		// var m = date.getMonth();
-		// var d = date.getDate();
-		var hour = date.getHours();
-		var minute = date.getMinutes();
-		document.getElementById('text-input').innerHTML  = (hour + minute);
-	}
-
 	function hi(duration){
 		document.getElementById("QRCODE").style.display = 'block';
 		// document.getElementById("TEXTINPUT").style.display = 'none';

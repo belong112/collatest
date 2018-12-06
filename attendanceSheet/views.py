@@ -3,6 +3,7 @@ from . models import userProfile,attendanceSheet,date_course
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from datetime import datetime
+from datetime import date
 
 # Create your views here.
 
@@ -35,17 +36,27 @@ def userAttendance_views(request):
         
     return render(request,'userAtd_tepl.html',locals())
 
-def sign(request):
-    if request.user.is_authenticated:
-        username=request.user.username
-        currentUser=User.objects.get(username=username)
-        today=datetime.now().strftime('%Y/%m/%d')
-        currenCourse=date_course.objects.get(date=today)
+def sign(request,time):
+    s = time%100;
+    m = time/100;
+    m2 = datetime.now().strftime("%M")
+    s2 = datetime.now().strftime("%S")
+    delta_s = (int(m2)-m)*60 + int(s2)-s+18
 
-        attendanceSheet.objects.filter(user=currentUser,course=currenCourse).update(presence=True,absence=False)
-        return HttpResponse('succesfully signUp')
-        
-    return redirect('/accounts/login')
+    if delta_s > 30:
+        return HttpResponse('u are yoo late hahaha')
+    else:
+        if request.user.is_authenticated:
+            username=request.user.username
+            currentUser=User.objects.get(username=username)
+            today=datetime.now().strftime('%Y/%m/%d')
+            currenCourse=date_course.objects.get(date=today)
+
+            attendanceSheet.objects.filter(user=currentUser,course=currenCourse).update(presence=True,absence=False)
+            return HttpResponse('succesfully signUp')
+            
+        return redirect('/accounts/login',t = time)
+    
 
 def teacherpage(request):
     return render(request,'teacherpage.html')
