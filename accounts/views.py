@@ -14,20 +14,35 @@ def signup(request):
         form=UserCreationForm()
     return render(request,'accounts/signup.html',locals())
 
-def login_views(request):
-    if request.method=='POST':
-        form=AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            #login the user
-            user=form.get_user()
-            login(request,user)
-            if request.user.is_authenticated:
-                return redirect('/collaAdmin/teacherpage')
-            else:
-                return HttpResponse("student page here")
+def login_views(request,timecode):
+    if timecode==0:
+        if request.method=='POST':
+            form=AuthenticationForm(data=request.POST)
+            if form.is_valid():
+                #login the user
+                user=form.get_user()
+                login(request,user)
+                if request.user.is_authenticated:
+                    return redirect('/collaAdmin/teacherpage')
+                else:
+                    return HttpResponse("student page here")
+        else:
+            form=AuthenticationForm
+        return render(request,'accounts/login.html',locals())
     else:
-        form=AuthenticationForm
-    return render(request,'accounts/login.html',locals())
+        if request.method=='POST':
+            form=AuthenticationForm(data=request.POST)
+            if form.is_valid():
+                #login the user
+                user=form.get_user()
+                login(request,user)
+                if request.user.is_authenticated:
+                    return redirect('/collaAdmin/sign/'+str(timecode))
+                else:
+                    return HttpResponse("student page here")
+        else:
+            form=AuthenticationForm
+        return render(request,'accounts/login.html',locals())
 
 def logout_views(request):
     logout(request)

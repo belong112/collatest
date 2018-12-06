@@ -1,0 +1,106 @@
+.container{
+    margin:0;
+    padding:15px;
+    min-height: 100vh;
+    padding: 15px;
+    font-family: monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aform{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 680px;
+    background: #fff;
+    border-radius: 10px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+@media (max-width: 768px){
+    .aform {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+}
+
+.googlebtn{
+    width: 100%;
+    height: 70px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    -webkit-box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.user{
+    padding-top: 31px;
+    padding-bottom: 9px;
+}
+
+.userinput{
+    width: 100%;
+    position: relative;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+}
+
+.input100{
+    line-height: 1.2;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    background: transparent;
+    height: 60px;
+    padding: 0 20px;
+}
+
+input{
+    border: none;
+}
+
+.signin{
+    width: 100%;
+    margin-top: 17px;
+}
+
+.signinbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 60px;
+    background-color: #333333;
+    border-radius: 10px;
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    transition: all 0.4s;
+    border: none;
+}
+
+.notmember{
+    padding-top: 55px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.a{
+    text-decoration: none; 
+}
+
+*{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+}
+

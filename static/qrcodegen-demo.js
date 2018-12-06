@@ -46,10 +46,10 @@ var app = new function() {
 		var second = date.getSeconds();
 		var timer = 30;
 		var tt = setInterval(function () {
-        if (--timer % 10 == 0) {
-        	var segs = qrcodegen.QrSegment.makeSegments('https://colla-atd.herokuapp.com/collaAdmin/sign'+minute*10+second);
+				timer-=1;
+        if (timer % 10 == 0) {
+        	var segs = qrcodegen.QrSegment.makeSegments('https://colla-atd.herokuapp.com/collaAdmin/sign'+minute+second);
         	initialize();
-    			clearInterval(tt);
         }
     }, 1000);
 
