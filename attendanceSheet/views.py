@@ -67,4 +67,18 @@ def addCourse(request):
        return render(request,'addCourse.html',locals())
 
 def manageCourse(request):
-    return HttpResponse('manageCourse')
+    courseLst=date_course.objects.all()
+    courseInfoLst=[]
+    courseNameLst=[]
+    courseDateLst=[]
+    courseMemoLst=[]
+    courseMtrx=[]
+    for course in courseLst:
+        courseInfoLst.append(course.course_name)
+        courseInfoLst.append(course.date)
+        courseInfoLst.append(course.memo)
+        courseMtrx.append(courseInfoLst)
+        courseNameLst.append(course.course_name)
+        courseDateLst.append(course.date)
+        courseMemoLst.append(course.memo)
+    return render(request,'manageCourse.html',locals())
