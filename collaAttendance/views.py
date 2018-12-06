@@ -4,7 +4,7 @@ from django.contrib import auth,contenttypes
 
 
 def homepage(request):
-		return render (request, "mainpage.html")
+		return render (request, "homepage.html")
 	
 def rollcall(request):
 	return render (request, "rollcall.html")	
