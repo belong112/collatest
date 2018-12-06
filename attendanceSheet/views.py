@@ -65,3 +65,6 @@ def addCourse(request):
         return redirect('/collaAdmin/userAttendance')
     else:
        return render(request,'addCourse.html',locals())
+
+def manageCourse(request):
+    return HttpResponse('manageCourse')
