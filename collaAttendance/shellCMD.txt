@@ -1,0 +1,28 @@
+from attendanceSheet.models import attendanceSheet as atd
+from attendanceSheet.models import date_course as dc
+from datetime import datetime
+from django.contrib.auth.models import User
+
+myformat='%Y/%m/%d'
+d1=datetime.now().strftime(myformat)
+c1='course1'
+createC1=dc.objects.create(date=d1,course_name=c1,memo='test1')
+C1=dc.objects.get(course_name=c1)
+
+d2='2018/12/6'
+c2='course2'
+createC2=dc.objects.create(date=d2,course_name=c2,memo='test2')
+C2=dc.objects.get(course_name=c2)
+
+superjian=User.objects.all()[0]
+normaljian=User.objects.all()[1]
+
+atd_r1=atd.objects.create(user=superjian,course=C1,presence=True,absence=False)
+atd_r2=atd.objects.create(user=normaljian,course=C1,presence=True,absence=False)
+atd_r3=atd.objects.create(user=superjian,course=C2)
+atd_r4=atd.objects.create(user=normaljian,course=C2,presence=True,absence=False)
+
+superjian.attendanceSheet.get(course=dc.objects.get(course_name='course1')).status()
+superjian.attendanceSheet.get(course=dc.objects.get(course_name='course2')).status()
+normaljian.attendanceSheet.get(course=dc.objects.get(course_name='course1')).status()
+normaljian.attendanceSheet.get(course=dc.objects.get(course_name='course2')).status()
