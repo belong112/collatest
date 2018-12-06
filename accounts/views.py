@@ -29,20 +29,6 @@ def login_views(request,timecode):
         else:
             form=AuthenticationForm
         return render(request,'accounts/login.html',locals())
-    else:
-        if request.method=='POST':
-            form=AuthenticationForm(data=request.POST)
-            if form.is_valid():
-                #login the user
-                user=form.get_user()
-                login(request,user)
-                if request.user.is_authenticated:
-                    return redirect('/collaAdmin/sign/'+str(timecode))
-                else:
-                    return HttpResponse("student page here")
-        else:
-            form=AuthenticationForm
-        return render(request,'accounts/login.html',locals())
 
 def logout_views(request):
     logout(request)
