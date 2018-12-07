@@ -37,7 +37,7 @@ def login_views(request,timecode):
                 return HttpResponse("student page here")
     else:
         form=AuthenticationForm
-    return render(request,'accounts/login2.html',locals())
+    return render(request,'accounts/login.html',locals())
 
 def logout_views(request):
     logout(request)
