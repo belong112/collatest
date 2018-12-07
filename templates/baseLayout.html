@@ -16,7 +16,12 @@
     <title>attendance sheet of colla</title>
 </head> 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"><a class='navbar-brand' href="/">Colla</a></nav>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class='navbar-brand' href="/">Colla</a>
+        {% if user.is_authenticated %}
+        <p class="navbar-brand">hi, {{user.username}}</p>
+        {%endif%}
+    </nav>
     <div style="margin-bottom: 40px;">.</div>
     {% block someFcn %}
     {% endblock %}

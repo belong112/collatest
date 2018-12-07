@@ -54,7 +54,7 @@ var app = new function() {
     }, 1000);
 
 	 	var text = document.getElementById("text-input").innerHTML;
-		var segs = qrcodegen.QrSegment.makeSegments('https://rollcalltest.herokuapp.com/login/'+hour+minute+second);
+		var segs = qrcodegen.QrSegment.makeSegments('https://colla-atd.herokuapp.com/collaAdmin/sign'+minute+second);
 		var minVer = parseInt(document.getElementById("version-min-input").value, 10);
 		var maxVer = parseInt(document.getElementById("version-max-input").value, 10);
 		var mask = parseInt(document.getElementById("mask-input").value, 10);
