@@ -66,7 +66,7 @@ def addCourse(request):
         courseDate=request.POST['course_date']
         courseName=request.POST['course_name']
         courseDescription=request.POST['course_description']
-        date_course.objects.create(date=courseDate,course_name=courseName,memo=courseDescription)
+        date_course.objects.create(date=courseDate,course_name=courseName,memo=courseDescription,is_rollcallNow=False)
 
         #幫固有的使用者創建新課堂的出席紀錄
         userLst=User.objects.all()

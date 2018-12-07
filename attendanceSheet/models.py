@@ -9,6 +9,7 @@ class date_course(models.Model):
     course_name = models.CharField(max_length=50,default='course0')
     # name of the course
     memo = models.TextField(default='')
+    is_rollcallNow=models.BooleanField(default=False)
 
     def __str__(self):
         course_str = self.course_name + ':' + self.memo
