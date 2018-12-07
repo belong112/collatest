@@ -2,7 +2,7 @@
 
 {% block someFcn %}
     <h1>Login</h1>
-    <form style="margin-bottom: 10px" action='/accounts/login/' method='post'>
+    <form style="margin-bottom: 10px" method='post'>
         {% csrf_token %}
         {{form}}
         <br>
