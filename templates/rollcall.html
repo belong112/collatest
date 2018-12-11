@@ -11,7 +11,6 @@
 			<div id="TEXTINPUT">
 				<div><textarea hidden="true" placeholder="plz enter the date ex.1125" id="text-input" style="width:30%; max-width:30em; height:3em; font-family:inherit"></textarea></div>
 			</div>
-			<button class="btn" id='start' onclick="hi(30);">開始點名</button> <!-- 時間 -->
 			<div>
 				<!-- <p><strong>QR Code:</strong></p> -->
 				<div id="QRCODE" style="display: none;">
@@ -38,16 +37,25 @@
 			</div>
 		</form>
 	</div>
+	<div class="form-group" align="center">
+		<select id="selctcourse" class="form-control" style="width: 20%;">
+			<option>-</option>
+			{% for i in courseLst %}
+				<option value="{{i.course_name}}">{{i.course_name}}</option>
+			{% endfor %}
+		</select>
+	</div>
 	<div>
+		<button class="btn" id='start' onclick="hi(30);">開始點名</button> <!-- 時間 -->
 		<button class="btn" onclick="location.href = '/collaAdmin/teacherpage'">back</button>
 	</div>
 
 <script type="text/javascript">
 	function hi(duration){
 		document.getElementById("QRCODE").style.display = 'block';
-		// document.getElementById("TEXTINPUT").style.display = 'none';
 		document.getElementById("start").style.display = 'none';
 		document.getElementById("mainh1").innerHTML = '請在限時內掃描';
+		document.getElementById("selctcourse").style.display = 'none';
 
 		var timer = duration, minutes, seconds;
 		var t = setInterval(function () {

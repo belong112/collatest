@@ -37,8 +37,11 @@ def userAttendance_views(request):
     return render(request,'userAtd_tepl.html',locals())
 
 def sign(request,time):
-    s = time%100;
-    m = time/100;
+    time_copy = time
+    c = time_copy%10
+    time_copy /= 10
+    s = time_copy%100
+    m = time_copy/100
     m2 = datetime.now().strftime("%M")
     s2 = datetime.now().strftime("%S")
     delta_s = (int(m2)-m)*60 + int(s2)-s+18
@@ -50,7 +53,7 @@ def sign(request,time):
             username=request.user.username
             currentUser=User.objects.get(username=username)
             today=datetime.now().strftime('%Y/%m/%d')
-            currenCourse=date_course.objects.get(date=today)
+            currenCourse=date_course.objects.get(course_name = 'course'+str(c))
 
             attendanceSheet.objects.filter(user=currentUser,course=currenCourse).update(presence=True,absence=False)
             return HttpResponse('succesfully signUp')
