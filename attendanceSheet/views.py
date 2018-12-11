@@ -66,7 +66,7 @@ def addCourse(request):
         courseDate=request.POST['course_date']
         courseName=request.POST['course_name']
         courseDescription=request.POST['course_description']
-        date_course.objects.create(date=courseDate,course_name=courseName,memo=courseDescription)
+        date_course.objects.create(date=courseDate,course_name=courseName,memo=courseDescription,is_rollcallNow=False)
 
         #幫固有的使用者創建新課堂的出席紀錄
         userLst=User.objects.all()
@@ -78,4 +78,16 @@ def addCourse(request):
        return render(request,'addCourse.html',locals())
 
 def manageCourse(request):
-    return HttpResponse('manageCourse')
+    courseLst=date_course.objects.all()
+    courseInfoLst=[]
+    courseNameLst=[]
+    courseMtrx=[]
+    courseDict=dict()
+    for course in courseLst:
+        courseInfoLst.append(course.course_name)
+        courseInfoLst.append(course.date)
+        courseInfoLst.append(course.memo)
+        courseMtrx.append(courseInfoLst)
+        courseInfoLst=[]
+        courseNameLst.append(course.course_name)
+    return render(request,'manageCourse.html',locals())
