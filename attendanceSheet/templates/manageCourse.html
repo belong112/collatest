@@ -3,19 +3,26 @@
 
     {% block someFcn %}
         <h1>課堂列表</h1>
-        <table align = "center">
+        <table align = "center" width = 100%>
             <tr>
                 <th>課堂名稱</th>
                 <th>課堂日期</th>
                 <th>課堂描述</th>
            </tr>
-           {% for course in courseMtrx %}
+           {% for course in courseLst %}
            <tr>
-                {% for info in course %}
-                <th> {{info}} </th>
-                {% endfor %}
+                <td> {{course.course_name}} </td>
+                <td> {{course.date}}</td>
+                <td> {{course.memo}}</td>
+                <td>
+                    <form action="/collaAdmin/modifyCourse" method = "GET">
+                        <input type='hidden' name='targetName' value='{{course.course_name}}'>
+                        <input type='submit' value='修改'>
+                    </form>
+                </td>
            </tr>
            {% endfor %}
         </table>
+        <button class="btn btn-xl col-lg-4" onclick="location.href = '/collaAdmin/addCourse/'">新增課程</button>
     
     {% endblock %}

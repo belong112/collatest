@@ -13,4 +13,5 @@ urlpatterns=[
     url(r'^teacherpage',views.teacherpage,name='teacherpage'),
     url(r'^addCourse',views.addCourse,name='addCourse'),
     url(r'^manageCourse',views.manageCourse),
+    url(r'^modifyCourse',views.modifyCourse),
 ]

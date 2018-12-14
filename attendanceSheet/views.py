@@ -81,16 +81,27 @@ def addCourse(request):
        return render(request,'addCourse.html',locals())
 
 def manageCourse(request):
-    courseLst=date_course.objects.all()
-    courseInfoLst=[]
-    courseNameLst=[]
-    courseMtrx=[]
-    courseDict=dict()
-    for course in courseLst:
-        courseInfoLst.append(course.course_name)
-        courseInfoLst.append(course.date)
-        courseInfoLst.append(course.memo)
-        courseMtrx.append(courseInfoLst)
-        courseInfoLst=[]
-        courseNameLst.append(course.course_name)
+    courseLst=date_course.objects.order_by('date')
     return render(request,'manageCourse.html',locals())
+
+def modifyCourse(request):
+    if request.method=='GET':
+        targetName=request.GET['targetName']
+        targetDate=date_course.objects.get(course_name=targetName).date
+        targetMemo=date_course.objects.get(course_name=targetName).memo
+        return render(request,'modifyCourse.html',locals())
+        
+    elif request.method=='POST':
+        originName=request.POST['targetCourse']
+        newName=request.POST['course_name']
+        newDate=request.POST['course_date']
+        newMemo=request.POST['course_description']
+        targetCourse=date_course.objects.filter(course_name=originName)
+        if newMemo=='':
+            newMemo=date_course.objects.get(course_name=originName).memo
+        test=newName+newDate+newMemo+originName
+
+        targetCourse.update(date=newDate)
+        targetCourse.update(memo=newMemo)
+        targetCourse.update(course_name=newName)
+        return redirect('/collaAdmin/manageCourse')
