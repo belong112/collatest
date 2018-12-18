@@ -1,0 +1,30 @@
+{% extends 'baseLayout.html' %}
+
+{% block someFcn %}
+    <h1>attendanceSheet</h1>
+
+    <form id='search-by-user' action='' method='post'>
+        {% csrf_token %}
+        <label for='targetUser'> look for particular course </label>
+        <input type=text name='targetCourse' id='target/course'>
+        <input type=hidden name='searchCourse' value='whatever'>
+        <input type="submit" value='search'>
+    </form>
+
+    <table align = "center">
+        <tr>
+            <th>課程名稱</th>
+            <th>上課日期</th>
+            <th>課程描述</th>
+            <th>出席狀況</th>
+        </tr>
+        {% for row in tableRow %}
+        <tr>
+            {% for column in row %}
+            <td>{{column}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

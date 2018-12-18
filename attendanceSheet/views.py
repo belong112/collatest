@@ -20,20 +20,19 @@ def userProfiles_views(request):
     return render(request,'userProfiles_tepl.html',context=context)
 
 def userAttendance_views(request):
+    userLst=User.objects.all()
     if request.method=='POST':
-        #do some shit
-        return HttpResponse('fuck my life')
-    else:
-        userLst=User.objects.all()
+        if request.POST['targetUser']!='':
+            userLst=User.objects.filter(username__contains=request.POST['targetUser'])
 
-        courseLst=date_course.objects.all()
-        atdDict=dict()
+    courseLst=date_course.objects.order_by('date')
+    atdDict=dict()
 
-        for user in userLst:
-            atdDict[user.username]=[]
-            for course in courseLst:
-                atdDict[user.username].append(user.attendanceSheet.order_by('-id').get(course=course).status())
-        
+    for user in userLst:
+        atdDict[user.username]=[]
+        for course in courseLst:
+            atdDict[user.username].append(user.attendanceSheet.order_by('-id').get(course=course).status())
+    
     return render(request,'userAtd_tepl.html',locals())
 
 def sign(request,time):
@@ -105,3 +104,27 @@ def modifyCourse(request):
         targetCourse.update(memo=newMemo)
         targetCourse.update(course_name=newName)
         return redirect('/collaAdmin/manageCourse')
+
+def studentpage(request):
+    return render(request,'studentpage.html',locals())
+
+def leaveApplication(request):
+    return HttpResponse('請假申請')
+
+def personalAtd(request):
+    querySet=date_course.objects.order_by('date')
+    tableRow=[]
+    temp=[]
+    if request.method=='POST':
+        if request.POST['targetCourse']!='':
+            querySet=date_course.objects.filter(course_name__contains=request.POST['targetCourse'])
+
+    for course in querySet:
+        temp.append(course.course_name)
+        temp.append(course.date)
+        temp.append(course.memo)
+        temp.append(attendanceSheet.objects.get(user=request.user,course=course).status())
+        tableRow.append(temp)
+        temp=[]
+
+    return render(request, 'personalAtd.html',locals())
