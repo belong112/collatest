@@ -16,6 +16,6 @@ urlpatterns=[
     url(r'^modifyCourse',views.modifyCourse),
     #--------------------------------------------------------------------------
     url(r'^studentpage$',views.studentpage),
-    url(r'^leaveApplication$',views.leaveApplication_view),
+    url(r'^leaveApplication$',views.leaveApplication),
     url(r'^personalAtd',views.personalAtd),
 ]

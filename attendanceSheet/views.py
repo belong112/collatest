@@ -108,9 +108,8 @@ def modifyCourse(request):
 def studentpage(request):
     return render(request,'studentpage.html',locals())
 
-def leaveApplication_view(request):
-
-    return HttpResponse('leave application')
+def leaveApplication(request):
+    return HttpResponse('請假申請')
 
 def personalAtd(request):
     querySet=date_course.objects.order_by('date')
