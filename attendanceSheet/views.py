@@ -53,7 +53,7 @@ def sign(request,time):
             username=request.user.username
             currentUser=User.objects.get(username=username)
             today=datetime.now().strftime('%Y/%m/%d')
-            currenCourse=date_course.objects.get(course_name = 'course'+str(c))
+            currenCourse=date_course.objects.get(course_name = 'course '+str(c))
 
             attendanceSheet.objects.filter(user=currentUser,course=currenCourse).update(presence=True,absence=False)
             return HttpResponse('succesfully signUp')

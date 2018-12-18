@@ -46,17 +46,17 @@ var app = new function() {
 		var second = date.getSeconds();
 		var timer = 30;
 		var course = document.getElementById('selctcourse').value;
-		course  = course.slice(6);
+		course  = course.slice(7);
 		var tt = setInterval(function () {
 				timer-=1;
         if (timer % 10 == 0) {
-        	var segs = qrcodegen.QrSegment.makeSegments("https://colla-atd.herokuapp.com/collaAdmin/sign/"+minute+second+course);
+        	var segs = qrcodegen.QrSegment.makeSegments("https://colla-atd2.herokuapp.com/collaAdmin/sign/"+minute+second+int(course));
         	initialize();
         }
     }, 1000);
 
 	 	var text = document.getElementById("text-input").innerHTML;
-		var segs = qrcodegen.QrSegment.makeSegments('https://colla-atd.herokuapp.com/collaAdmin/sign/'+minute+second+course);
+		var segs = qrcodegen.QrSegment.makeSegments('https://colla-atd2.herokuapp.com/collaAdmin/sign/'+minute+second+int(course));
 		var minVer = parseInt(document.getElementById("version-min-input").value, 10);
 		var maxVer = parseInt(document.getElementById("version-max-input").value, 10);
 		var mask = parseInt(document.getElementById("mask-input").value, 10);
