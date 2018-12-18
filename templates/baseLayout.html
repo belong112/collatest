@@ -17,9 +17,13 @@
 </head> 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class='navbar-brand' href="/">Colla</a>
+        {% if user.is_superuser %}
+        <a class='navbar-brand' href="/collaAdmin/teacherpage">Colla</a>
+        {% else %}
+        <a class='navbar-brand' href="/collaAdmin/teacherpage">Colla</a>
+        {% endif %}
         {% if user.is_authenticated %}
-        <p style="margin-left: auto; color: white;" >hi, {{user.username}}  <a href="/accounts/logout"> logout </a></p>
+        <p style="margin-left: auto; color: white;" >hi, {{request.user.username}}  <a href="/accounts/logout"> logout </a></p>
         {%endif%}
     </nav>
     <div style="margin-bottom: 40px;">.</div>

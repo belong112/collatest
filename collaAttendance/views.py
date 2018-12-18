@@ -7,7 +7,7 @@ def homepage(request):
 		return render (request, "homepage.html")
 	
 def rollcall(request):
-	courseLst = date_course.objects.all()
+	courseLst = date_course.objects.order_by('date')
 	return render (request, "rollcall.html",locals())
 
 
