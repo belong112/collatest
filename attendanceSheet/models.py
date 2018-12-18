@@ -62,3 +62,23 @@ class attendanceSheet(models.Model):
             return 'personal leave'
         else:
             return 'fuck you'
+
+class leaveApplication:
+    user=models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='leaveApplications',
+        null=True,
+        blank=True,
+    )
+
+    course = models.ForeignKey(
+        date_course,
+        on_delete=models.CASCADE,
+        related_name='atdSummary_leave',
+        null=True,
+        blank=True
+    )
+
+    description = models.TextField(default='')
+    is_approved = models.BooleanField(default='false')
