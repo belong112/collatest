@@ -44,7 +44,7 @@ def sign(request,time):
     m = time_copy/100
     m2 = datetime.now().strftime("%M")
     s2 = datetime.now().strftime("%S")
-    delta_s = (int(m2)-m)*60 + int(s2)-s+18
+    delta_s = (int(m2)-m)*60 + int(s2)-s
 
     if delta_s > 30:
         return HttpResponse('u are yoo late hahaha')
@@ -53,7 +53,7 @@ def sign(request,time):
             username=request.user.username
             currentUser=User.objects.get(username=username)
             today=datetime.now().strftime('%Y/%m/%d')
-            currenCourse=date_course.objects.get(course_name = 'course'+str(c))
+            currenCourse=date_course.objects.get(course_name = 'course '+str(c))
 
             attendanceSheet.objects.filter(user=currentUser,course=currenCourse).update(presence=True,absence=False)
             return HttpResponse('succesfully signUp')

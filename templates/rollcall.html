@@ -27,13 +27,13 @@
 			<div>
 				<input type="hidden" name="output-format" id="output-format-bitmap" checked="checked">
 				<input type="hidden" value="4" id="border-input">
-				<input type="hidden" value="1" id="version-min-input" oninput="app.handleVersionMinMax('min');">
-				<input type="hidden" value="40" id="version-max-input" oninput="app.handleVersionMinMax('max');">
+				<input type="hidden" value="1" id="version-min-input"> <!-- oninput="app.handleVersionMinMax('min');"> -->
+				<input type="hidden" value="40" id="version-max-input" ><!-- oninput="app.handleVersionMinMax('max');"> -->
 				<input type="hidden" value="-1" id="mask-input">
 				<input type="hidden" checked="checked" id="boost-ecc-input"><label for="boost-ecc-input"><!-- Increase <abbr title="error-correcting code">ECC</abbr> level within same version --></label>
 			</div>
 			<div id="svg-xml-row">
-				<textarea id="svg-xml-output" readonly="readonly" style="width:100%; max-width:50em; height:15em; font-family:monospace"></textarea>
+				<textarea id="svg-xml-output" hidden="true" readonly="readonly" style="width:100%; max-width:50em; height:15em; font-family:monospace"></textarea>
 			</div>
 		</form>
 	</div>
@@ -46,7 +46,7 @@
 		</select>
 	</div>
 	<div>
-		<button class="btn" id='start' onclick="hi(30);">開始點名</button> <!-- 時間 -->
+		<button class="btn" id='start' onclick="hi(30); redrawQrCode();">開始點名</button> <!-- 時間 -->
 		<button class="btn" onclick="location.href = '/collaAdmin/teacherpage'">back</button>
 	</div>
 

@@ -1,7 +1,5 @@
 "use strict";
-
-
-var app = new function() {
+// var app = new function() {
 	
 	function initialize() {
 		var elems = document.querySelectorAll("input[type=number], textarea");
@@ -44,9 +42,15 @@ var app = new function() {
 		var hour = date.getHours();
 		var minute = date.getMinutes();
 		var second = date.getSeconds();
-		var timer = 30;
+		if(second < 10)
+			second ='0' + second;
+ 		var timer = 30;
 		var course = document.getElementById('selctcourse').value;
 		course = course.slice(7);
+
+		var text = document.getElementById("text-input").innerHTML;
+		var segs = qrcodegen.QrSegment.makeSegments("https://colla-atd2.herokuapp.com/collaAdmin/sign/"+minute+second+course);
+
 		var tt = setInterval(function () {
 				timer-=1;
         if (timer % 10 == 0) {
@@ -55,8 +59,6 @@ var app = new function() {
         }
     }, 1000);
 
-	 	var text = document.getElementById("text-input").innerHTML;
-		var segs = qrcodegen.QrSegment.makeSegments('https://colla-atd2.herokuapp.com/collaAdmin/sign/'+minute+second+course);
 		var minVer = parseInt(document.getElementById("version-min-input").value, 10);
 		var maxVer = parseInt(document.getElementById("version-max-input").value, 10);
 		var mask = parseInt(document.getElementById("mask-input").value, 10);
@@ -123,6 +125,7 @@ var app = new function() {
 		stats += "error correction = level " + "LMQH".charAt(qr.errorCorrectionLevel.ordinal) + ", ";
 		stats += "data bits = " + qrcodegen.QrSegment.getTotalBits(segs, qr.version) + ".";
 		document.getElementById("statistics-output").textContent = stats;
+		initialize();
 	}
 	
 	
@@ -143,5 +146,5 @@ var app = new function() {
 	}
 	
 	
-	initialize();
-}
+	// initialize();
+
