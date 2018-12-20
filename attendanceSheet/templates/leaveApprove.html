@@ -1,0 +1,66 @@
+
+    {% extends 'baseLayout.html' %}
+
+    {% block someFcn %}
+        <h1>待審核請假申請</h1>
+        <table align = "center" width = 100%>
+            <tr>
+                <th>申請序號</th>
+                <th>申請人</th>
+                <th>申請日期</th>
+                <th>課堂名稱</th>
+                <th>上課日期</th>
+                <th>請假事由</th>
+                <th>審核</th>
+           </tr>
+
+            {% for aplc in aplcLst %}
+            <tr>
+                <td>{{aplc.id}}</td>
+                <td>{{aplc.user.username}}</td>
+                <td>{{aplc.applicateDate}}</td>
+                <td>{{aplc.course.course_name}}</td>
+                <td>{{aplc.course.date}}</td>
+                <td>{{aplc.description}}</td>   
+                <td>
+                    <form action='' method='post'>
+                        {% csrf_token %}
+                        <input type=hidden name='targetID' value='{{aplc.id}}'>
+                        <input type=submit name='result' value='approve'>
+                        <input type=submit name='result' value='deny'>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <h1>已審核請假申請</h1>
+        <table align = "center" width = 100%>
+            <tr>
+                <th>申請序號</th>
+                <th>申請人</th>
+                <th>申請日期</th>
+                <th>課堂名稱</th>
+                <th>上課日期</th>
+                <th>請假事由</th>
+                <th>審核</th>
+            </tr>
+            {% for aplc in aplcLST_approved %}
+            <tr>
+                <td>{{aplc.id}}</td>
+                <td>{{aplc.user.username}}</td>
+                <td>{{aplc.applicateDate}}</td>
+                <td>{{aplc.course.course_name}}</td>
+                <td>{{aplc.course.date}}</td>
+                <td>{{aplc.description}}</td>   
+                <td>
+                    <form action='' method='post'>
+                        {% csrf_token %}
+                        <input type=hidden name='targetID' value='{{aplc.id}}'>
+                        <input type=submit name='regret' value='regret'>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endblock %}

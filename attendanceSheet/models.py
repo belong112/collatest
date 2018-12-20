@@ -63,7 +63,7 @@ class attendanceSheet(models.Model):
         else:
             return 'fuck you'
 
-class leaveApplication:
+class leaveApplication(models.Model):
     user=models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -81,4 +81,17 @@ class leaveApplication:
     )
 
     description = models.TextField(default='')
-    is_approved = models.BooleanField(default='false')
+    applicateDate = models.CharField(max_length=11,default='')
+    under_review = models.BooleanField(default=True)
+    is_approved = models.BooleanField(default=False)
+    is_denied = models.BooleanField(default=False)
+
+    def status(self):
+        if self.under_review:
+            return '審核中'
+        elif self.is_approved:
+            return '通過'
+        elif self.is_denied:
+            return '拒絕'
+        else:
+            return 'fuck you'

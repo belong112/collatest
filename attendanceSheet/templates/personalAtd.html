@@ -1,7 +1,7 @@
 {% extends 'baseLayout.html' %}
 
 {% block someFcn %}
-    <h1>attendanceSheet</h1>
+    <h1>出席紀錄</h1>
 
     <form id='search-by-user' action='' method='post'>
         {% csrf_token %}
@@ -27,4 +27,23 @@
         {% endfor %}
     </table>
 
+    <br>
+
+    <h1>請假紀錄</h1>
+    <table align = "center">
+            <tr>
+                <th>申請日期</th>
+                <th>課程名稱</th>
+                <th>上課日期</th>
+                <th>請假事由</th>
+                <th>審核狀況</th>
+            </tr>
+            {% for row in leaveAplc %}
+            <tr>
+                {% for column in row %}
+                <td> {{column}} </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+    </table>
 {% endblock %}

@@ -25,6 +25,5 @@ urlpatterns = [
     url(r'^homepage/$',views.homepage),
     url(r'^accounts/',include('accounts.urls')),
     url(r'^collaAdmin/',include('attendanceSheet.urls')),
-    url(r'^student/',include('attendanceSheet.urls')),
     url(r'^rollcall/$',views.rollcall),
 ]

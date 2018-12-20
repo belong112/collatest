@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from datetime import datetime
 from datetime import date
+import pytz
 
 # Create your views here.
 
@@ -108,8 +109,28 @@ def modifyCourse(request):
 def studentpage(request):
     return render(request,'studentpage.html',locals())
 
-def leaveApplication(request):
-    return HttpResponse('請假申請')
+def leaveApplication_view(request):
+    if request.method=='POST':
+        if 'application' in request.POST:
+            
+            targetName=request.POST['targetCourse']
+            targetCourse=date_course.objects.get(course_name=targetName)
+            description = request.POST['description']
+            
+            tz=pytz.timezone('Asia/Taipei')
+            applicateDate = datetime.now(tz).strftime('%Y/%m/%d')
+
+            leaveApplication.objects.create(user=request.user,
+                                            course=targetCourse,
+                                            description=description,
+                                            applicateDate=applicateDate)
+            return redirect('/collaAdmin/personalAtd')
+
+
+    courseNameLst=[]
+    for course in date_course.objects.order_by('date'):
+        courseNameLst.append(course.course_name)
+    return render(request,'leaveApplication.html',locals())
 
 def personalAtd(request):
     querySet=date_course.objects.order_by('date')
@@ -126,5 +147,40 @@ def personalAtd(request):
         temp.append(attendanceSheet.objects.get(user=request.user,course=course).status())
         tableRow.append(temp)
         temp=[]
+    
+    leaveAplc_query=leaveApplication.objects.filter(user=request.user)
+    leaveAplc=[]
+    for aplc in leaveAplc_query:
+        temp.append(aplc.applicateDate)
+        temp.append(aplc.course.course_name)
+        temp.append(aplc.course.date)
+        temp.append(aplc.description)
+        temp.append(aplc.status())
+        leaveAplc.append(temp)
+        temp=[]
+
 
     return render(request, 'personalAtd.html',locals())
+
+def leaveApprove(request):
+    lvAplc=[]
+    temp=[]
+    aplcLst = leaveApplication.objects.order_by('applicateDate').filter(under_review=True)
+    aplcLST_approved = leaveApplication.objects.order_by('applicateDate').filter(under_review=False)
+
+    if request.method=="POST":
+        if 'result' in request.POST:
+            leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(under_review=False, )
+            targetCourse=leaveApplication.objects.get(id=int(request.POST['targetID'])).course
+            targetUser=leaveApplication.objects.get(id=int(request.POST['targetID'])).user
+            if request.POST['result']=='approve':
+                leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(is_approved=True,is_denied=False)
+                attendanceSheet.objects.filter(user=targetUser, course=targetCourse).update(absence=False, personal_leave=True)
+            else:
+                leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(is_denied=True,is_approved=False)
+        elif 'regret' in request.POST:
+            targetCourse=leaveApplication.objects.get(id=int(request.POST['targetID'])).course
+            targetUser=leaveApplication.objects.get(id=int(request.POST['targetID'])).user
+            leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(under_review=True, is_approved=False,is_denied=False)
+            attendanceSheet.objects.filter(user=targetUser, course=targetCourse).update(absence=True, personal_leave=False)
+    return render(request, 'leaveApprove.html',locals())

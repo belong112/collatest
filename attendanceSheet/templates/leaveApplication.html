@@ -5,8 +5,9 @@
     <form id='leaveApplication' action='' method='post'>
         {% csrf_token %}
         <select name='targetCourse'>
-
-            <option>course.course_name</option>
+            {% for course in courseNameLst %}
+            <option>{{course}}</option>
+            {% endfor %}
 
         </select>
         <br>

@@ -35,9 +35,9 @@ def login_views(request,timecode):
                 if request.user.is_superuser:
                     return redirect('/collaAdmin/teacherpage')
                 else:
-                    return redirect('/student/studentpage')
+                    return redirect('/collaAdmin/studentpage')
             else:
-                return HttpResponse("student page here")
+                return HttpResponse("/")
     else:
         form=AuthenticationForm
     return render(request,'accounts/login.html',locals())
