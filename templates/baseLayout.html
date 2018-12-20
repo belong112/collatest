@@ -20,7 +20,7 @@
         {% if user.is_superuser %}
         <a class='navbar-brand' href="/collaAdmin/teacherpage">Colla</a>
         {% else %}
-        <a class='navbar-brand' href="/collaAdmin/teacherpage">Colla</a>
+        <a class='navbar-brand' href="/">Colla</a>
         {% endif %}
         {% if user.is_authenticated %}
         <p style="margin-left: auto; color: white;" >hi, {{request.user.username}}  <a href="/accounts/logout"> logout </a></p>
