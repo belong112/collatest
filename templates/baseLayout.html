@@ -23,7 +23,7 @@
         <a class='navbar-brand' href="/">Colla</a>
         {% endif %}
         {% if user.is_authenticated %}
-        <p style="margin-left: auto; color: white;" >hi, {{request.user.username}}  <a href="/accounts/logout"> logout </a></p>
+        <span style="margin-left: auto; color: white;" >hi, {{request.user.username}}  <a href="/accounts/logout"> logout </a></span>
         {%endif%}
     </nav>
     <div style="margin-bottom: 40px;">.</div>
