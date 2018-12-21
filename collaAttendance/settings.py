@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'colla_db',
         'USER':'postgres',
-        'PASSWORD':'0000',
+        'PASSWORD':'ntuhandsome110',
         'HOST':'',
         'PORT':'',
 

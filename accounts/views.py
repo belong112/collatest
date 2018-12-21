@@ -45,3 +45,6 @@ def login_views(request,timecode):
 def logout_views(request):
     logout(request)
     return redirect('/')
+
+def googleLog(request):
+    return render(request,'accounts/googleLog.html')

@@ -10,4 +10,5 @@ urlpatterns=[
     #url(r'^login/$',views.login_views,name='login_student'),
     path('login/<int:timecode>',views.login_views,name='login_views'),
     url(r'^logout/$',views.logout_views),
+    url(r'^googleLog/$',views.googleLog),
 ]
