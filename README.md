@@ -1,5 +1,5 @@
 # collatest
-https://colla-atd.herokuapp.com/
+https://colla-atd2.herokuapp.com/
 
 addCoutse
 
