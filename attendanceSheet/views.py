@@ -29,10 +29,10 @@ def userAttendance_views(request):
     courseLst=date_course.objects.order_by('date')
     atdDict=dict()
 
-    for user in userLst:
-        atdDict[user.username]=[]
+    for users in userLst:
+        atdDict[users.username]=[]
         for course in courseLst:
-            atdDict[user.username].append(user.attendanceSheet.order_by('-id').get(course=course).status())
+            atdDict[users.username].append(users.attendanceSheet.order_by('-id').get(course=course).status())
     
     return render(request,'userAtd_tepl.html',locals())
 
