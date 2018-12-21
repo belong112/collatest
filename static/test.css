@@ -21,6 +21,7 @@ header{
 }
 button{
 	font-family: Noto Sans TC;
+	margin-bottom: 10px;
 }
 button:hover{
 	color: #FFF;
@@ -33,6 +34,14 @@ button:hover{
 	width:50%;
 	margin-right: 10px;
 	margin-bottom: 10px;
+}
+
+table{
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+table,th,td{
+	border: 1px solid;
 }
 /*.btn{
 	color: #777;

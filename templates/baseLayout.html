@@ -17,11 +17,6 @@
 </head> 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        {% if user.is_superuser %}
-        <a class='navbar-brand' href="/collaAdmin/teacherpage">Colla</a>
-        {% else %}
-        <a class='navbar-brand' href="/">Colla</a>
-        {% endif %}
         {% if user.is_authenticated %}
         <span style="margin-left: auto; color: white;" >hi, {{request.user.username}}  <a href="/accounts/logout"> logout </a></span>
         {%endif%}

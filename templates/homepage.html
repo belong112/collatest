@@ -3,9 +3,12 @@
 {% block someFcn %}
 
     <header><H1>WELCOME</H1></header>
-    {% if user.is_authenticated %}
-    <button class="btn btn-xl col-lg-4" onclick="location.href = '/collaAdmin/studentpage' ">I'm a student.</button>
+    {% if user.is_superuser %}
+    <button class="btn btn-xl col-lg-4" onclick="alert('You are not a fucking student.') ">I'm a student.</button>
     <button class="btn btn-xl col-lg-4" onclick="location.href = '/collaAdmin/teacherpage' ">I'm a teacher.</button>
+    {% elif user.is_authenticated %}
+    <button class="btn btn-xl col-lg-4" onclick="location.href = '/collaAdmin/studentpage' ">I'm a student.</button>
+    <button class="btn btn-xl col-lg-4" onclick=" alert('You are not a fucking teacher.') ">I'm a teacher.</button>
     {% else %}
     <button class="btn btn-xl col-lg-4" onclick="location.href = '/accounts/login/0' ">I'm a student.</button>
     <button class="btn btn-xl col-lg-4" onclick="location.href = '/accounts/login/0' ">I'm a teacher.</button>
