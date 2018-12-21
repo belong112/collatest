@@ -78,11 +78,13 @@ def addCourse(request):
             attendanceSheet.objects.create(user=user,course=newCourse)
         return redirect('/collaAdmin/userAttendance')
     else:
-       return render(request,'addCourse.html',locals())
+        return render(request,'addCourse.html',locals())
 
 def manageCourse(request):
-    courseLst=date_course.objects.order_by('date')
-    return render(request,'manageCourse.html',locals())
+    if request.user.is_superuser:
+        courseLst=date_course.objects.order_by('date')
+        return render(request,'manageCourse.html',locals())
+    return redirect('/')
 
 def modifyCourse(request):
     if request.method=='GET':
@@ -163,24 +165,25 @@ def personalAtd(request):
     return render(request, 'personalAtd.html',locals())
 
 def leaveApprove(request):
-    lvAplc=[]
-    temp=[]
-    aplcLst = leaveApplication.objects.order_by('applicateDate').filter(under_review=True)
-    aplcLST_approved = leaveApplication.objects.order_by('applicateDate').filter(under_review=False)
-
-    if request.method=="POST":
-        if 'result' in request.POST:
-            leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(under_review=False, )
-            targetCourse=leaveApplication.objects.get(id=int(request.POST['targetID'])).course
-            targetUser=leaveApplication.objects.get(id=int(request.POST['targetID'])).user
-            if request.POST['result']=='approve':
-                leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(is_approved=True,is_denied=False)
-                attendanceSheet.objects.filter(user=targetUser, course=targetCourse).update(absence=False, personal_leave=True)
-            else:
-                leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(is_denied=True,is_approved=False)
-        elif 'regret' in request.POST:
-            targetCourse=leaveApplication.objects.get(id=int(request.POST['targetID'])).course
-            targetUser=leaveApplication.objects.get(id=int(request.POST['targetID'])).user
-            leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(under_review=True, is_approved=False,is_denied=False)
-            attendanceSheet.objects.filter(user=targetUser, course=targetCourse).update(absence=True, personal_leave=False)
-    return render(request, 'leaveApprove.html',locals())
+    if request.user.is_superuser:
+        lvAplc=[]
+        temp=[]
+        aplcLst = leaveApplication.objects.order_by('applicateDate').filter(under_review=True) 
+        aplcLST_approved = leaveApplication.objects.order_by('applicateDate').filter(under_review=False)
+        if request.method=="POST":
+            if 'result' in request.POST:
+                leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(under_review=False)
+                targetCourse=leaveApplication.objects.get(id=int(request.POST['targetID'])).course
+                targetUser=leaveApplication.objects.get(id=int(request.POST['targetID'])).user
+                if request.POST['result']=='approve':
+                    leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(is_approved=True,is_denied=False)
+                    attendanceSheet.objects.filter(user=targetUser, course=targetCourse).update(absence=False, personal_leave=True)
+                else:
+                   leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(is_denied=True,is_approved=False)
+            elif 'regret' in request.POST:
+                targetCourse=leaveApplication.objects.get(id=int(request.POST['targetID'])).course
+                targetUser=leaveApplication.objects.get(id=int(request.POST['targetID'])).user
+                leaveApplication.objects.filter(id=int(request.POST['targetID'])).update(under_review=True, is_approved=False,is_denied=False)
+                attendanceSheet.objects.filter(user=targetUser, course=targetCourse).update(absence=True, personal_leave=False)
+        return render(request, 'leaveApprove.html',locals())
+    return redirect('/')
